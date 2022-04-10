@@ -44,9 +44,11 @@ function addData(chart, label, data) {
 	chart.update();
 }
 
+let dataSets = [];
+
 function updateLog() {
 	const log = document.querySelector("#netWorthLog");
-	let dateData = new Date().toLocaleDateString();
+	let dateData = document.querySelector("#date").value;
 	let cashInput = Number(document.querySelector("#cashInput").value);
 	let savingsInput = Number(document.querySelector("#savingsInput").value);
 	let investmentInput = Number(
@@ -65,10 +67,22 @@ function updateLog() {
 
 	log.prepend(newRow);
 
+	document.querySelector("#date").value = "";
 	document.querySelector("#cashInput").value = "";
 	document.querySelector("#savingsInput").value = "";
 	document.querySelector("#investmentInput").value = "";
 	document.querySelector("#debtInput").value = "";
 
 	addData(myChart, dateData, netWorth);
+
+	let dataPoint = {
+		id: dateData,
+		cash: cashInput,
+		savings: savingsInput,
+		investments: investmentInput,
+		debts: debtInput,
+	};
+	dataSets.push(dataPoint);
+
+	console.log(dataSets);
 }
